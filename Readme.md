@@ -6,6 +6,7 @@ This project is a Symfony-based application that allows users to securely share 
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Versions](#versions)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Cron Job](#cron-job)
