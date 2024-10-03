@@ -8,14 +8,12 @@ This project is a Symfony-based application that allows users to securely share 
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Message Structure](#message-structure)
 - [Cron Job](#cron-job)
-- [License](#license)
 
 ## Features
 
-- Share encrypted messages securely.
-- Set expiry for messages:
+- Generate encrypted messages securely.
+- Set 10 mins of expiry for messages:
     - Read once, then delete.
     - Delete after a specified period.
 - Easily identify messages using unique identifiers.
@@ -40,25 +38,22 @@ This project is a Symfony-based application that allows users to securely share 
 To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
-   ```
-   git clone https://github.com/your-username/symfony-message-encryption.git
-   cd symfony-message-encryption
+   ```git clone git@github.com:mshende-project/secret-message.git```
+   ```cd symfony-message-encryption```
 
 2. **Build and run docker containers**
-    ```
-    docker compose up -d --build
+    ```docker compose up -d --build```
    
 3. **Project can be accessed at**
-    ```
-    http://localhost/
+    ```http://localhost/```
    
 ## Database access
 The database can be accessed at
 ```http://localhost:8081/```
    
 ## Usage
-1. To generate encrypted message add text (required) recipient (optional), you will get indentifier and decryption key which will be required to read message.
-2. To read message go to ``http://localhost/message/read`` enter details and you will see the descrypted message.
+1. To generate encrypted message add text and recipient, you will get indentifier and decryption key which will be required to read message.
+2. To read message go to ``http://localhost/message/read`` enter details and you will see the decrypted message.
 
 ## Command to remove expired message which are unread
    To manually remove unread expired messages, you can run the following command:
