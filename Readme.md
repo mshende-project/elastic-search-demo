@@ -39,8 +39,8 @@ This project is a Symfony-based application that allows users to securely share 
 To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
-   ```git clone git@github.com:mshende-project/secret-message.git```
-   ```cd symfony-message-encryption```
+   ```git clone git@github.com:mshende-project/secret-message.git
+   cd symfony-message-encryption
 
 2. **Build and run docker containers**
     ```docker compose up -d --build```
