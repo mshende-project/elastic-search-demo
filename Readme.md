@@ -1,6 +1,6 @@
 # Symfony Message Encryption with Docker
 
-This project is a Symfony-based application that allows users to securely share encrypted messages with colleagues. The application includes features for setting message expiry, either after being read once or after a specified period. It is set up using Docker for easy deployment and includes a cron job for automatically removing expired messages.
+This project is a Symfony-based application that allows users to securely share encrypted messages with colleagues. The application includes features for creating encrypted message, and remove after being read once or after a an expiration period. It is set up using Docker for easy deployment and includes a cron job for automatically removing expired messages.
 
 ## Table of Contents
 
