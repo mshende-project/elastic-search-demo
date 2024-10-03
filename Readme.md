@@ -40,12 +40,14 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
    ```git clone git@github.com:mshende-project/secret-message.git```
+   
+2. **Go to**
    ```cd symfony-message```
 
-2. **Build and run docker containers**
+3. **Build and run docker containers**
     ```docker compose up -d --build```
    
-3. **Project can be accessed at**
+4. **Project can be accessed at**
     ```http://localhost/```
    
 ## Database access
