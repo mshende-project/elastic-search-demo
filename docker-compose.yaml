@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+  nginx-service:
+    image:  'nginx:alpine'
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+     - '80:80'
+    networks:
+      - secret-message-network
+    volumes:
+      - ./app:/app
+
+  php8-service:
+    build: 
+      context: .
+      dockerfile: php/Dockerfile
+    container_name: php
+    networks:
+      - secret-message-network
+    working_dir: /app
+#    environment:
+#      DATABASE_URL: mysql://user:secret@172.18.0.1:3306/secret-message
+    volumes:
+      - ./app:/app
+#      - ./app/.env:/app/.env
+#      - ./app:/app
+#      - ./logs/php.log:/var/log/fpm-php.www.log
+
+  mysql8-service:
+    image: 'mysql:8'
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: secret-message
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    networks:
+      - secret-message-network
+
+  phpmyadmin:
+    image: 'phpmyadmin'
+    container_name: phpmyadmin
+    links:
+      - mysql8-service
+    environment:
+      PMA_HOST: mysql8-service
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8081:80
+    networks:
+      - secret-message-network
+
+networks:
+  secret-message-network:
+    driver: bridge

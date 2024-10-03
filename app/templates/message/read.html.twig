@@ -1,0 +1,24 @@
+<div style="align-content: center; text-align: center">
+    <h1 class="mb-4">Read Encrypted Message</h1>
+
+    {{ form_start(form, {
+        'attr': {
+            'style': 'background-color: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #ddd;'
+        }
+    }) }}
+
+    <div style="margin-bottom: 15px;">
+        {{ form_label(form.identifier, 'Message identifier') }}
+        {{ form_widget(form.identifier) }}
+        {{ form_errors(form.identifier) }}
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        {{ form_label(form.decryption_key, 'Decryption key') }}
+        {{ form_widget(form.decryption_key) }}
+        {{ form_errors(form.decryption_key) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+</div>

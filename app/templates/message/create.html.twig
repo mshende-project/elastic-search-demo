@@ -1,0 +1,24 @@
+<div style="align-content: center; text-align: center">
+    <h1 class="mb-4">Generate Message</h1>
+
+    {{ form_start(form, {
+        'attr': {
+            'style': 'background-color: #f9f9f9; padding: 20px; border-radius: 10px; border: 1px solid #ddd;'
+        }
+    }) }}
+
+    <div style="margin-bottom: 15px;">
+        {{ form_label(form.text, 'Text') }}
+        {{ form_widget(form.text) }}
+        {{ form_errors(form.text) }}
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        {{ form_label(form.recipient, 'Recipient') }}
+        {{ form_widget(form.recipient) }}
+        {{ form_errors(form.recipient) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+</div>
