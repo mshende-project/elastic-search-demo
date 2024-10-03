@@ -22,13 +22,8 @@ services:
     networks:
       - secret-message-network
     working_dir: /app
-#    environment:
-#      DATABASE_URL: mysql://user:secret@172.18.0.1:3306/secret-message
     volumes:
       - ./app:/app
-#      - ./app/.env:/app/.env
-#      - ./app:/app
-#      - ./logs/php.log:/var/log/fpm-php.www.log
 
   mysql8-service:
     image: 'mysql:8'
