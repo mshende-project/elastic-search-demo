@@ -42,4 +42,4 @@ fi
 service cron start
 
 # Start the PHP-FPM service
-exec php-fpm
+exec "$@"
