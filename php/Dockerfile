@@ -35,7 +35,7 @@ RUN mkdir -p /app/var/log /app/var/cache
 # Set the correct permissions for the log and cache directories
 RUN chmod -R 777 /app/var/log /app/var/cache
 
-COPY .env /app/.env
+COPY /app/.env /app/.env
 
 # Copy the crontab file to /etc/cron.d
 COPY /app/app-crontab /etc/cron.d/app-crontab
