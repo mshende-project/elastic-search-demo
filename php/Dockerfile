@@ -48,7 +48,7 @@ RUN touch /app/var/log/cron.log
 
 WORKDIR /app
 
-COPY ../docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
