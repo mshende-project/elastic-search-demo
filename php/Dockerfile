@@ -48,9 +48,14 @@ RUN touch /app/var/log/cron.log
 
 WORKDIR /app
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY ../entrypoint/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod 775 /usr/local/bin/docker-entrypoint
+
+RUN sed -i 's/\r//' /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
+
+#ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
 CMD ["php-fpm"]
 
