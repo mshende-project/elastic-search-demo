@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Search Results</h1>
+
+    <form method="get" action="{{ path('search') }}">
+        <input type="search" name="q" placeholder="Search..." value="{{ searchTerm }}" required />
+        <button type="submit">Search</button>
+    </form>
+
+    {% if searchTerm %}
+        <h2>Results for "{{ searchTerm }}"</h2>
+        <ul>
+            {% for result in results %}
+                <li>{{ result.transformed.name }}</li>
+            {% else %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

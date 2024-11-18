@@ -1,0 +1,18 @@
+{% block body %}
+    <h1>Search</h1>
+
+    <form method="get" action="{{ path('search') }}">
+        <input
+                type="search"
+                name="query"
+                placeholder="Search..."
+                value=""
+                required
+        />
+        <button type="submit">Search</button>
+    </form>
+
+{#    {% if query %}#}
+        <h2>Search Results for </h2>
+{#    {% endif %}#}
+{% endblock %}

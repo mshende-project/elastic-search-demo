@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Search Results</h1>
+
+    <form method="get" action="{{ path('search_part2') }}">
+        <input type="search" name="q" placeholder="Search..." value="{{ searchTerm }}" required />
+        <button type="submit">Search</button>
+    </form>
+
+    {% if searchTerm %}
+        <h2>Results for "{{ searchTerm }} {{ pagination }}"</h2>
+        <ul>
+            {% for result in pagination.currentPageResults %}
+                <li>{{ result.transformed.name }}</li>
+            {% else %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if pagination is not null %}
+        <div class="pagination">
+            {% if pagination.hasPrevious %}
+                <a href="{{ path('search_part2', {'q': searchTerm, 'page': pagination.currentPage - 1}) }}">Previous</a>
+            {% endif %}
+
+            {% for page in pagination.pagesInRange %}
+                <a href="{{ path('search_part2', {'q': searchTerm, 'page': page}) }}">{{ page }}</a>
+            {% endfor %}
+
+            {% if pagination.hasNext %}
+                <a href="{{ path('search_part2', {'q': searchTerm, 'page': pagination.currentPage + 1}) }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -8,7 +8,7 @@ services:
     ports:
      - '80:80'
     networks:
-      - secret-message-network
+      - elastic-search-network
     volumes:
       - ./app:/app
 
@@ -18,7 +18,7 @@ services:
       dockerfile: php/Dockerfile
     container_name: php
     networks:
-      - secret-message-network
+      - elastic-search-network
     working_dir: /app
     volumes:
       - ./app:/app
@@ -29,13 +29,13 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: secret-message
+      MYSQL_DATABASE: elastic-search
       MYSQL_USER: user
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     networks:
-      - secret-message-network
+      - elastic-search-network
 
   phpmyadmin:
     image: 'phpmyadmin'
@@ -47,10 +47,78 @@ services:
       PMA_PORT: 3306
     restart: always
     ports:
-      - 8081:80
+      - "8081:80"
     networks:
-      - secret-message-network
+      - elastic-search-network
+
+#  # elasticsearch server (official image)
+#  # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+#  elasticsearch:
+#    container_name: elasticsearch
+#    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+#    ports:
+#      - "9209:9200"
+#    environment:
+#      - "discovery.type=single-node"
+#      - "bootstrap.memory_lock=true"
+#      - "ES_JAVA_OPTS=-Xms1G -Xmx1G"
+#      - "xpack.security.enabled=false"
+#      - "http.cors.enabled=true"
+##      - "http.cors.allow-origin=*"
+#    networks:
+#      - elastic-search-network
+
+#  kibana:
+#    container_name: kibana
+#    image: docker.elastic.co/kibana/kibana:8.3.3
+#    networks:
+#      - elastic-search-network
+#    ports:
+#      - "5601:5601"
+
+
+  # elasticsearch server (official image)
+  # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+  elasticsearch:
+    container_name: sb-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    ports:
+      - "9209:9200"
+    environment:
+      - "discovery.type=single-node"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1G -Xmx1G"
+      - "xpack.security.enabled=false"
+      - "http.cors.enabled=true"
+      - "http.cors.allow-origin=*"
+    networks:
+      - elastic-search-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.1
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic-search-network
+
+  # elasticsearch head manager (fork of mobz/elasticsearch-head for elasticsearch 6)
+  # /!\ it isn't an official image /!\
+  # https://hub.docker.com/r/tobias74/elasticsearch-head
+#  elasticsearch-head:
+#    container_name: elasticsearch-head
+#    depends_on:
+#      - elasticsearch
+#    image: tobias74/elasticsearch-head:6
+#    ports:
+#      - "9109:9100"
+#    networks:
+#      - elastic-search-network
 
 networks:
-  secret-message-network:
+  elastic-search-network:
     driver: bridge
